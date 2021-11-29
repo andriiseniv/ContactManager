@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CSVReader.Models.CSVModel>
+
+<head>
+    <meta charset="utf-8">
+    <title>background-image</title>
+    <style>
+        body {
+            background-color: grey;
+            background: grey url(/img/back1.jpg) fixed;
+        }
+    </style>
+</head>
+
+<div class="row ">
+    <div class="container ">
+        <div style="position:relative; top:0.11%; left:15%;" class="row py-3 mt-3">
+            <div class="list-group-item list-group-item-action gap-2 p-3   shadow-lg bg-light    col-sm col-md-8 align-items-lg-end">
+                <div class=" mr-3 mb-3">
+                    <a asp-action="Index" height:25px; style="position:relative; right:12px; top:5px; " class="d-inline btn py-0 mb-4 col-md-9">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" fill="currentColor" class="bi bi-arrow-left text-black-50" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                        </svg>
+                        <h5 style="position:absolute; left:40px; top:-1px; font-weight:200;">Back</h5>
+                    </a>
+
+                    <h5 class="ml-5" style="position:relative; top:5px; float:right; right:320px; font-weight:500;">@Model.Count(x => x.CSVID == 0) Contacts</h5>
+
+                    <form style="position:relative;float:right;bottom:21px; left:157px;" asp-controller="CSV" asp-action="Write">
+                        @foreach (var item in Model)
+                        {
+                            <p>
+                                <input id="it3" value=@item.Name name="name" class="invisible" style="white-space:inherit; width:0px;height:0px; position:absolute;" />
+                                <input id="it3" value=@item.DateOfBirth name="dateOfBirth" class="invisible" style="width:0px;height:0px; position:absolute;" />
+                                <input id="it3" value=@item.Married.ToString() name="married" class="invisible" style="width:0px;height:0px; position:absolute;" />
+                                <input id="it3" value=@item.Phone name="phone" class="invisible" style="width:0px;height:0px; position:absolute;" />
+                                <input id="it3" value=@item.Salary name="salary" class="invisible" style="width:0px;height:0px; position:absolute;" />
+
+                            </p>
+
+                        }
+
+                        <button asp-controller="CSV" asp-action="Write" class="btn text-white btn-block" style="width: 110px; bottom:90px; font-weight: 200; font-size: medium; background-color:#2E4053; float:right;">
+
+                            Save
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
+                            </svg>
+                        </button>
+             
+                    </form>
+
+                </div>
+
+                <table class="table table-striped">
+                    <thead style=" background-color: #273746;" class="text-white">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Birth</th>
+                            <th scope="col">Married</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.Name.ToString()</td>
+                            <td>@item.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                            <td>@item.Married</td>
+                            <td>+@item.Phone</td>
+                            <td>$@Convert.ToInt32(item.Salary)</td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

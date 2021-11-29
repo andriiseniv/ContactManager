@@ -1,0 +1,221 @@
+﻿@model IEnumerable<CSVReader.Models.CSVModel>
+
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<head>
+    <meta charset="utf-8">
+    <title>background-image</title>
+    <style>
+        body {
+            background-color: grey;
+            background: grey url(/img/back1.jpg) fixed;
+        }
+    </style>
+</head>
+
+<div class="row ">
+    <div class="container ">
+        <div style="position:relative; top:0.11%; left:5%;" class="row py-3 mt-3">
+
+            <div class="col-sm" style="position:fixed; top:23px; left:63%; width:400px;">
+                <div style="position:absolute; right:15px; top:0.5%; " class="col-md-9 text-center list-group-item list-group-item-action d-flex gap-2 p-3 py-1 m-md-2 my-5 shadow-lg bg-light">
+                    <form asp-controller="CSV" asp-action="ShowFindResults">
+                        <p class="mb-0 text-left">Condition</p>
+
+
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="mb-0 text-left">Name</p>
+                                <input placeholder="All Names" name="FindName" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <p></p>
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="mb-0 text-left">Birth</p>
+                                <input placeholder="Year of Birth" name="FindBirthFrom" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <p></p>
+
+                        <select class="custom-select" id="inputGroupSelect05" name="FindMarried">
+                            <option selected>Married</option>
+                            <option value=1>Yes</option>
+                            <option value=-1>No</option>
+                        </select>
+
+                        <p></p>
+
+                        <div class="form-group">
+                            <p class="mb-0 text-left">Phone Number</p>
+                            <input placeholder="Any Phone" name="FindPhone" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <p></p>
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="mb-0 text-left">Salary</p>
+                                <input placeholder="From" name="FindSalaryFrom" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+
+                            <div class="col">
+                                <p class="mb-0 text-left text-white">Salary</p>
+                                <input placeholder="To" name="FindSalaryTo" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <p></p>
+
+                        <div class="form-group mb-0">
+                            <input style="background-color: #273746;" type="submit" value="Find" class="btn input-block-level form-control btn-dark " />
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+
+            <div class="list-group-item list-group-item-action gap-2 p-3   shadow-lg bg-light    col-sm col-md-8 align-items-lg-end">
+
+
+                <div class="mb-4">
+
+                    <form style="float:left ; position:relative; " method="post" asp-controller="CSV" asp-action="Import" enctype="multipart/form-data">
+
+                        <input style="background-color: #273746; height:35px; font-weight:200;" type="file" name="file" class="text-white" />
+                        <button style="background-color: #273746; height:35px; font-weight:200;" class="btn btn-sm text-white" type="submit">Import</button>
+                    </form>
+
+                    <div style="float:right; position:relative; " class="dropdown">
+                        <button style="background-color: #273746; height:35px; font-weight:200;" class="btn btn-sm dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter text-white" viewBox="0 0 16 16">
+                                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                            </svg>
+                            Standart Sorting
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <form asp-controller="Car" asp-action="Index" method="post">
+                                @foreach (var item in Model)
+                                {
+                                    <p>
+                                        <input id="it3" value=@item.CSVID name="contacts" class="invisible" style="width:0px;height:0px; position:absolute;" />
+                                    </p>
+                                }
+
+                                <p class="dropdown-item mb-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down-alt" ; viewBox="0 0 16 16">
+                                        <path d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z" />
+                                    </svg>
+                                    <button style="outline:0px; background-color: transparent; border-color: transparent;" value="AName" name="type" asp-controller="CSV" asp-action="Index">Name</button>
+
+                                </p>
+                                <p class="dropdown-item mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                                        <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                    </svg>
+                                    <button style="outline:0px; background-color: transparent; border-color:transparent;" value="DName" name="type" asp-controller="CSV" asp-action="Index">Name</button>
+                                </p>
+
+
+                                <p class="dropdown-item mb-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down-alt" ; viewBox="0 0 16 16">
+                                        <path d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z" />
+                                    </svg>
+                                    <button style="outline:0px; background-color: transparent; border-color: transparent;" value="ABirth" name="type" asp-controller="CSV" asp-action="Index">Birth</button>
+
+                                </p>
+                                <p class="dropdown-item mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                                        <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                    </svg>
+                                    <button style="outline:0px; background-color: transparent; border-color:transparent;" value="DBirth" name="type" asp-controller="CSV" asp-action="Index">Birth</button>
+                                </p>
+
+
+                                <p class="dropdown-item mb-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down-alt" ; viewBox="0 0 16 16">
+                                        <path d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z" />
+                                    </svg>
+                                    <button style="outline:0px; background-color: transparent; border-color: transparent;" value="ASalary" name="type" asp-controller="CSV" asp-action="Index">Salary</button>
+
+                                </p>
+                                <p class="dropdown-item mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                                        <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                    </svg>
+                                    <button style="outline:0px; background-color: transparent; border-color:transparent;" value="DSalary" name="type" asp-controller="CSV" asp-action="Index">Salary</button>
+                                </p>
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @if (Model.Count(x => x.CSVID > 0) == 0)
+                {
+                    <h2 style="position:relative; top:17px; font-weight:500;" class="text-black-50">Nothing Found</h2>
+                }
+                else
+                {
+                    <table style="position:relative; top:12px;" class="table table-striped shadow-lg col ">
+                        <thead style=" background-color: #273746;" class="text-white">
+                            <tr>
+                                <th style="font-weight:200" scope="col">Name</th>
+                                <th style="font-weight:200" scope="col">Birth</th>
+                                <th style="font-weight:200" scope="col">Married</th>
+                                <th style="font-weight:200" scope="col">Phone</th>
+                                <th style="font-weight:200" scope="col">Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td> <a asp-controller="CSV" asp-action="Edit" asp-route-id="@item.CSVID" class="btn">@item.Name </a></td>
+
+                                <td> <a asp-controller="CSV" asp-action="Edit" asp-route-id="@item.CSVID" class="btn">@item.DateOfBirth.ToString("dd/MM/yyyy")</a></td>
+
+
+
+                                @if (item.Married == true)
+                                {
+                                    <td> <a asp-controller="CSV" asp-action="Edit" asp-route-id="@item.CSVID" class="btn">Yes</a></td>
+                                }
+                                else if (item.Married == false)
+                                {
+                                    <td> <a asp-controller="CSV" asp-action="Edit" asp-route-id="@item.CSVID" class="btn">No</a></td>
+                                }
+
+                                <td> <a asp-controller="CSV" asp-action="Edit" asp-route-id="@item.CSVID" class="btn">+@item.Phone</a></td>
+
+                                <td> <a asp-controller="CSV" asp-action="Edit" asp-route-id="@item.CSVID" class="btn">$@Convert.ToInt32(item.Salary)</a></td>
+
+                            </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>

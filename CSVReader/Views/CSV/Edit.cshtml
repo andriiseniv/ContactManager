@@ -1,0 +1,76 @@
+﻿@model CSVReader.Models.CSVModel
+    <head>
+        <meta charset="utf-8">
+        <title>background-image</title>
+        <style>
+            body {
+                background-color: grey;
+                background: grey url(/img/back1.jpg) fixed;
+            }
+        </style>
+    </head>
+
+    @{
+        ViewData["Title"] = Model.Name;
+    }
+
+    <div class="row ">
+        <div class="container ">
+            <div style="position:relative; top:0.11%; left:15%;" class="py-3 mt-3">
+                <div class="list-group-item list-group-item-action gap-2 p-3   shadow-lg bg-light    col-sm col-md-4 align-items-lg-end">
+                   
+                    <a asp-action="Index" height:25px; style="position:relative; right:12px; top:5px; " class="d-inline btn py-0 mb-5 col-md-9">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" fill="currentColor" class="bi bi-arrow-left text-black-50" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                        </svg>
+                        <h5 style="position:absolute; left:40px; top:-1px; font-weight:200;">Back</h5>
+                    </a>
+
+                    <div class="row mt-3">
+                        <div class="col-md-11 ml-2">
+                            <form asp-action="Edit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="CSVID" />
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DateOfBirth" class="control-label"></label>
+                                    <input asp-for="DateOfBirth" class="form-control" />
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                                <div class="form-group form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="Married" /> @Html.DisplayNameFor(model => model.Married)
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Phone" class="control-label"></label>
+                                    <input asp-for="Phone" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Salary" class="control-label"></label>
+                                    <input asp-for="Salary" class="form-control" />
+                                    <span asp-validation-for="Salary" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input style="background-color: #273746; width: 150px;" type="submit" value="Save" class="btn btn-primary" />
+                                    <input style=" float:right" asp-controller="CSV" asp-action="Delete" type="submit" asp-for="@Model.CSVID" asp-route-id="@Model.CSVID" value="Delete" class="btn btn-danger bi bi-trash-fill" />
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
